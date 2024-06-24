@@ -57,10 +57,15 @@ export default function RegistrationForm() {
     validationSchema: validationSchema,
     onSubmit: async(values) => {
       try {
-        const userData = await registerUser({
+        // const userData = await registerUser({
+        //   ...values,
+        //   tasks: [],
+        // });
+// bypassing json-server api call
+          const userData = await {
           ...values,
           tasks: [],
-        });
+        };
         dispatch(register(userData));
         toast.success('Registered successfully');
         navigate('/login');
