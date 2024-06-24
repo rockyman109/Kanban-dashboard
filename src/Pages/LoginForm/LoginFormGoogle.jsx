@@ -20,6 +20,8 @@ import { loginSuccess } from "../../redux/features/userSlice";
 import { setTasks } from '../../redux/features/taskSlice';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
+const clientId=process.env.REACT_APP_CLIENT_ID
+
 const defaultTheme = createTheme();
 
 const validationSchema = Yup.object({
