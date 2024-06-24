@@ -56,29 +56,34 @@ export default function LoginForm() {
       }
       console.log(values);
       try {
-        const allUsersInDb = await fetchUsers();
-        // console.log("allUsersInDb",allUsersInDb);
-        const foundUserData = allUsersInDb.find(
-          (user) =>
-            (user.email === values.identifier || user.username === values.identifier) &&
-            user.password === values.password
-        );
-        if (foundUserData) {
-          // console.log(foundUserData,"foundUserData")
-          toast.success('Login successful');
-          navigate("/dashboard");
-          sessionStorage.setItem("token", "token")
-          dispatch(loginSuccess(foundUserData))
-          dispatch(setTasks(foundUserData?.tasks))
+         toast.success('Login successful');
+        navigate("/dashboard");
+        sessionStorage.setItem("token", "token")
 
-        } else {
-          const existingUser = allUsersInDb.find((user) => user.email === values.identifier || user.username === values.identifier);
-          if (existingUser) {
-            toast.error('Invalid password');
-          } else {
-            toast.error('User not found');
-          }
-        }
+        // bypass json-server apis hitting
+        // const allUsersInDb = await fetchUsers();
+        // // console.log("allUsersInDb",allUsersInDb);
+        // const foundUserData = allUsersInDb.find(
+        //   (user) =>
+        //     (user.email === values.identifier || user.username === values.identifier) &&
+        //     user.password === values.password
+        // );
+        // if (foundUserData) {
+        //   // console.log(foundUserData,"foundUserData")
+        //   toast.success('Login successful');
+        //   navigate("/dashboard");
+        //   sessionStorage.setItem("token", "token")
+        //   dispatch(loginSuccess(foundUserData))
+        //   dispatch(setTasks(foundUserData?.tasks))
+
+        // } else {
+        //   const existingUser = allUsersInDb.find((user) => user.email === values.identifier || user.username === values.identifier);
+        //   if (existingUser) {
+        //     toast.error('Invalid password');
+        //   } else {
+        //     toast.error('User not found');
+        //   }
+        // }
       } catch (error) {
         toast.error('An error occurred while trying to log in');
         console.error('Login error:', error);
